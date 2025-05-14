@@ -13,3 +13,9 @@ export const INITIAL_NODES: AppNode[] = [
   { id: 'START', type: 'input', position: { x: 0, y: 0 }, data: { label: 'START' } }
 ]
 
+export const TEST_NODES: AppNode[] = [
+  { id: 'START', type: 'input', position: { x: 0, y: 0 }, data: { label: 'START' } },
+  { id: 'Dialogue1', type: 'dialogue-node', position: { x: 0, y: 100 }, data: { character: 'MONKEY', dialogue: "So what are you going to do?" } },
+  { id: 'Dialogue2', type: 'dialogue-node', position: { x: -50, y: 200 }, data: { character: 'MONKEY', dialogue: "Really, okay. Silly billy." } },
+  { id: 'Dialogue3', type: 'dialogue-node', position: { x: 50, y: 200 }, data: { character: 'MONKEY', dialogue: "Uugh you're boring." } }
+]
