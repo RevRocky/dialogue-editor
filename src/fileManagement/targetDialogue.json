@@ -1,0 +1,24 @@
+[
+    {
+        "character": 0,
+        "dialogue": "Hello this is a test",
+        "choices": [
+            {
+                "text": "Oh cool",
+                "next": 1
+            },
+            {
+                "text": "I'm not interested",
+                "next": 2
+            }
+        ]
+    },
+    {
+        "character": 0,
+        "dialogue": "I'm glad you're excited"
+    },
+    {
+        "character": 0,
+        "dialogue": "Let's talk about something else"
+    }
+]
