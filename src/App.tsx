@@ -8,12 +8,15 @@ import {
   useNodesState,
   useEdgesState,
   type OnConnect,
+  ControlButton,
 } from '@xyflow/react';
 
 import '@xyflow/react/dist/style.css';
 
 import { INITIAL_NODES, nodeTypes, TEST_NODES } from './nodes';
 import { INITIAL_EDGES, TEST_EDGES, edgeTypes } from './edges';
+import { exportGraph } from './fileManagement/exportGraph';
+import { DownloadIcon } from '@radix-ui/react-icons';
 
 export default function App() {
   const [nodes, , onNodesChange] = useNodesState(TEST_NODES);
@@ -36,7 +39,12 @@ export default function App() {
     >
       <Background />
       <MiniMap />
-      <Controls />
+      <Controls >
+        <ControlButton onClick={() => exportGraph(nodes, edges)}>
+          <DownloadIcon/>
+        </ControlButton>
+      </Controls>
+
     </ReactFlow>
   );
 }

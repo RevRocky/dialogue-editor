@@ -1,16 +1,14 @@
-import { useState } from 'react';
-import { Handle, Position } from '@xyflow/react';
+import { Handle, Position, useReactFlow } from '@xyflow/react';
 import { TextNodeProps } from './types';
  
 
 
-export function DialogueNode(data: any) {
-
-    const props = data.data as TextNodeProps;
-
-    const [character, setCharacter] = useState(props.character)
-    const [dialogue, setDialogue] = useState(props.dialogue);
+export function DialogueNode(nodeData: any) {
     
+    const id = nodeData.id;
+    const props = nodeData.data as TextNodeProps;
+    const { updateNodeData } = useReactFlow();
+
     return (
         <>
         <Handle type="target" position={Position.Top} id="top" />
@@ -19,15 +17,19 @@ export function DialogueNode(data: any) {
             <input
                 id="input-character"
                 name="input-character"
-                value={character}
-                onChange={(e) => setCharacter(e.target.value)}
+                value={props.character}
+                onChange={(e) => updateNodeData(id, {
+                    character: e.target.value
+                })}
             />
             <label htmlFor="input-dialogue">Dialogue:</label>
             <textarea
                 id="input-dialogue" 
                 name="input-dialogue" 
-                value={dialogue}
-                onChange={(e) => setDialogue(e.target.value)}
+                value={props.dialogue}
+                onChange={(e) => updateNodeData(id, {
+                   dialogue: e.target.value
+                })}
                 className="nodrag" />
         </div>
         <Handle type="source" position={Position.Bottom} id="bottom" />

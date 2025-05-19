@@ -5,6 +5,7 @@ import {
   BaseEdge,
   type EdgeProps,
   type Edge,
+  useReactFlow,
 } from '@xyflow/react';
  
 
@@ -19,7 +20,7 @@ export const ChoiceEdge: FC<EdgeProps<Edge<{ label: string }>>> = ({
   data,
 }) => {
 
-  console.log("Mrow", id, data?.label)
+  const { updateEdgeData } = useReactFlow();
 
   const [label, setLabel] = useState(data?.label ?? "") ;
 
@@ -54,8 +55,8 @@ export const ChoiceEdge: FC<EdgeProps<Edge<{ label: string }>>> = ({
         >
           <textarea
             className='nopan'
-            value={label}
-            onChange={(e) => setLabel(e.target.value)}
+            value={data?.label ?? ""}
+            onChange={(e) => updateEdgeData(id, {label: e.target.value})}
           />
         </div>
       </EdgeLabelRenderer>

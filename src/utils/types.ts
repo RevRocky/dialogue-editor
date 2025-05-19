@@ -7,5 +7,6 @@ export type Choice = {
 export type Dialogue = {
     character: string,
     dialogue: string,
-    choices?: Choice[]     
+    choices?: Choice[]  
+    next?: string   
 }
