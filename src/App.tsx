@@ -10,6 +10,7 @@ import {
   type OnConnect,
   ControlButton,
   useReactFlow,
+  Edge,
 } from '@xyflow/react';
 
 import '@xyflow/react/dist/style.css';
@@ -29,7 +30,27 @@ export default function App() {
     [setEdges]
   );
 
-  const { addNodes, screenToFlowPosition } = useReactFlow();
+  const { addNodes, screenToFlowPosition, updateEdge } = useReactFlow();
+
+  function toggleEdgeType(_event: unknown, edge: Edge) {
+    // For now we keep it simple. Toggle edges between a 'straight' edge
+    // which doesnt reflect a users choice, or a choice edge which does reflect
+    // a users choice.
+    if (edge.type !== 'choice') {
+      updateEdge(edge.id, {
+        type: 'choice',
+        data: {
+          label: ''
+        }
+      });
+    }
+    else {
+      updateEdge(edge.id, {
+        type: 'bezier',
+        data: {}
+      })
+    }
+  }
 
   return (
     <ReactFlow
@@ -38,6 +59,7 @@ export default function App() {
       onNodesChange={onNodesChange}
       edges={edges}
       edgeTypes={edgeTypes}
+      onEdgeDoubleClick={toggleEdgeType}
       onEdgesChange={onEdgesChange}
       onConnect={onConnect}
       fitView
