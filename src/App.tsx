@@ -45,7 +45,7 @@ export default function App() {
       <Background />
       <MiniMap />
       <Controls >
-        <ControlButton onClick={() => {
+        <ControlButton title="Add Dialogue Node" onClick={() => {
           const viewport = document.querySelector('.react-flow') as Element;
           const boundingRect = viewport.getBoundingClientRect();
 
@@ -59,7 +59,7 @@ export default function App() {
         }}>
           <PlusCircledIcon/>
         </ControlButton>
-        <ControlButton onClick={() => exportGraph(nodes, edges)}>
+        <ControlButton title="Export to JSON" onClick={() => exportGraph(nodes, edges)}>
           <DownloadIcon/>
         </ControlButton>
       </Controls>
