@@ -1,4 +1,4 @@
-import { Edge, getConnectedEdges, getOutgoers } from "@xyflow/react";
+import { Edge, getConnectedEdges } from "@xyflow/react";
 import { AppNode, DialogueNode } from "../nodes/types";
 import { START_NODE_ID } from "../nodes";
 import { Dialogue } from "../utils/types";
@@ -38,7 +38,6 @@ export function exportGraph(nodes: AppNode[], edges: Edge[]) {
 
         // The number of connections will tell us how to proceed...
         const outgoingEdges = getConnectedEdges([destinationNode], edges).filter(edge => edge.source === destinationNode.id);
-        console.log("Nya", outgoingEdges)
 
         switch(outgoingEdges.length) {
             case 0:
@@ -84,6 +83,4 @@ export function exportGraph(nodes: AppNode[], edges: Edge[]) {
 
     exploreEdge(initialEdge);
 
-
-    console.log(exportedDialogue)
 }

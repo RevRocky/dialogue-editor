@@ -22,10 +22,6 @@ export const ChoiceEdge: FC<EdgeProps<Edge<{ label: string }>>> = ({
 
   const { updateEdgeData } = useReactFlow();
 
-  const [label, setLabel] = useState(data?.label ?? "") ;
-
-
-
   const [edgePath, labelX, labelY] = getBezierPath({
     sourceX,
     sourceY,

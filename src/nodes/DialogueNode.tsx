@@ -1,6 +1,19 @@
 import { Handle, Position, useReactFlow } from '@xyflow/react';
 import { TextNodeProps } from './types';
  
+export function createNewDialogueNode(posX: number, posY: number) {
+
+    return {
+     id: crypto.randomUUID(),
+     type: 'dialogue-node', 
+     position: { x: posX, y: posY }, 
+     data: { 
+        character: '', 
+        dialogue: '' 
+    }
+    }
+
+}
 
 
 export function DialogueNode(nodeData: any) {

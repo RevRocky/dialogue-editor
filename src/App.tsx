@@ -9,6 +9,7 @@ import {
   useEdgesState,
   type OnConnect,
   ControlButton,
+  useReactFlow,
 } from '@xyflow/react';
 
 import '@xyflow/react/dist/style.css';
@@ -16,7 +17,9 @@ import '@xyflow/react/dist/style.css';
 import { INITIAL_NODES, nodeTypes, TEST_NODES } from './nodes';
 import { INITIAL_EDGES, TEST_EDGES, edgeTypes } from './edges';
 import { exportGraph } from './fileManagement/exportGraph';
-import { DownloadIcon } from '@radix-ui/react-icons';
+import { DownloadIcon, PlusCircledIcon } from '@radix-ui/react-icons';
+import { createNewDialogueNode } from './nodes/DialogueNode';
+import { DialogueNode } from './nodes/types';
 
 export default function App() {
   const [nodes, , onNodesChange] = useNodesState(TEST_NODES);
@@ -25,6 +28,8 @@ export default function App() {
     (connection) => setEdges((edges) => addEdge(connection, edges)),
     [setEdges]
   );
+
+  const { addNodes, screenToFlowPosition } = useReactFlow();
 
   return (
     <ReactFlow
@@ -40,6 +45,20 @@ export default function App() {
       <Background />
       <MiniMap />
       <Controls >
+        <ControlButton onClick={() => {
+          const viewport = document.querySelector('.react-flow') as Element;
+          const boundingRect = viewport.getBoundingClientRect();
+
+          const centre = screenToFlowPosition({
+            x: boundingRect.x + boundingRect.width / 2,
+            y: boundingRect.y + boundingRect.height / 2,
+          })
+
+          const newNode = createNewDialogueNode(centre.x, centre.y);
+          addNodes(newNode as DialogueNode)
+        }}>
+          <PlusCircledIcon/>
+        </ControlButton>
         <ControlButton onClick={() => exportGraph(nodes, edges)}>
           <DownloadIcon/>
         </ControlButton>
