@@ -6,6 +6,9 @@ export default defineConfig({
   base: './',
   build: {
     outDir: 'dist',
+    rollupOptions: {
+      external: ["electron/renderer"]
+    }
   },
   plugins: [react()],
 })

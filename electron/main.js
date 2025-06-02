@@ -43,11 +43,6 @@ ipcMain.on('export', async (event, {payload})=> {
     const destination = dialog.showSaveDialogSync();
 
     if (destination) {
-        const filePath = destination.split('/'); // TODO: Would this work on windows ? 
-        let filename = filePath.pop();
-        let directory = filePath.join('/'); // Again idk if this is good for windows
-        const properties = {directory, filename}
-
-        fs.writeFileSync(filePath, payload.dialogue)
+        fs.writeFileSync(destination, payload.dialogue)
     }
 })
