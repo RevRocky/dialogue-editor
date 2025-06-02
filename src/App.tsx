@@ -15,8 +15,8 @@ import {
 
 import '@xyflow/react/dist/style.css';
 
-import { INITIAL_NODES, nodeTypes, TEST_NODES } from './nodes';
-import { INITIAL_EDGES, TEST_EDGES, edgeTypes } from './edges';
+import { nodeTypes, TEST_NODES } from './nodes';
+import { TEST_EDGES, edgeTypes } from './edges';
 import { exportGraph } from './fileManagement/exportGraph';
 import { DownloadIcon, PlusCircledIcon } from '@radix-ui/react-icons';
 import { createNewDialogueNode } from './nodes/DialogueNode';

@@ -2,6 +2,7 @@ import { Edge, getConnectedEdges } from "@xyflow/react";
 import { AppNode, DialogueNode } from "../nodes/types";
 import { START_NODE_ID } from "../nodes";
 import { Dialogue } from "../utils/types";
+import { ipcRenderer } from "electron";
 
 
 function getNodeById(targetId: string, nodes: AppNode[]) {
@@ -82,5 +83,11 @@ export function exportGraph(nodes: AppNode[], edges: Edge[]) {
     }
 
     exploreEdge(initialEdge);
+
+    ipcRenderer.send("export", {
+        payload: {
+            dialogue: JSON.stringify(exportedDialogue)
+        }
+    })
 
 }

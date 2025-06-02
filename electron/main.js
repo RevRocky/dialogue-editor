@@ -1,9 +1,13 @@
-import { app, BrowserWindow } from 'electron';
+import { app, BrowserWindow, dialog, ipcMain } from 'electron';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import electronDl from 'electron-dl';
+import fs from 'fs'
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
+
+electronDl();
 
 let mainWindow;
 
@@ -31,5 +35,19 @@ app.on('window-all-closed', () => {
     // eslint-disable-next-line no-undef
     if (process.platform !== 'darwin') {
         app.quit()
+    }
+})
+
+ipcMain.on('export', async (event, {payload})=> {
+    // TODO: Get Default Path setup
+    const destination = dialog.showSaveDialogSync();
+
+    if (destination) {
+        const filePath = destination.split('/'); // TODO: Would this work on windows ? 
+        let filename = filePath.pop();
+        let directory = filePath.join('/'); // Again idk if this is good for windows
+        const properties = {directory, filename}
+
+        fs.writeFileSync(filePath, payload.dialogue)
     }
 })
