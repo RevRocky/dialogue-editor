@@ -11,7 +11,7 @@ function getNodeById(targetId: string, nodes: AppNode[]) {
 }
 
 export function exportGraph(nodes: AppNode[], edges: Edge[]) {
-    let exportedDialogue: Record<string, Dialogue> = {};
+    const exportedDialogue: Record<string, Dialogue> = {};
 
     // TODO: Figure out if we can we just assume start is at pos 0 of nodes
     const startNode = nodes.filter(node => node.id === START_NODE_ID);
@@ -33,7 +33,7 @@ export function exportGraph(nodes: AppNode[], edges: Edge[]) {
         // Implicit else: we have a dialogue node
         destinationNode = destinationNode as DialogueNode;
 
-        let dialogue: Dialogue = {
+        const dialogue: Dialogue = {
             character: destinationNode.data.character,
             dialogue: destinationNode.data.dialogue
         }
@@ -91,12 +91,6 @@ export function exportGraph(nodes: AppNode[], edges: Edge[]) {
             dialogue: JSON.stringify(exportedDialogue)
         }
     })
-    /*
-    ipcRenderer.send("export", {
-        payload: {
-            dialogue: JSON.stringify(exportedDialogue)
-        }
-    })
-    */
+
 
 }

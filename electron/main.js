@@ -38,11 +38,27 @@ app.on('window-all-closed', () => {
     }
 })
 
+// This is also used for save for now.
+// TODO: This might want to be changed once I separate
+// file extensions. 
 ipcMain.on('export', async (event, {payload})=> {
     // TODO: Get Default Path setup
     const destination = dialog.showSaveDialogSync();
 
     if (destination) {
         fs.writeFileSync(destination, payload.dialogue)
+    }
+})
+
+ipcMain.on('open', async () => {
+    const fileToOpen = dialog.showOpenDialogSync();
+    console.log("Mrrp", fileToOpen)
+    if (fileToOpen) {
+        const contents = fs.readFileSync(fileToOpen[0], { encoding: 'utf8', flag: 'r' });
+
+        mainWindow.webContents.send("file-opened", {
+            graph: contents
+        });
+
     }
 })
