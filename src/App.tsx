@@ -39,11 +39,9 @@ export default function App() {
 
   // When a file is opened we update the nodes and edges to reflect that
   //@ts-expect-error typescript
-  window.api.on("file-opened", (_, message: OpenFileMessage) => {
-    console.log("Nya nya", message)
+  window.api.on("file-opened", (message: OpenFileMessage) => {
     const graph = JSON.parse(message.graph) as ReactFlowJsonObject;
 
-    console.log("Meow");
     setNodes(graph.nodes as AppNode[]);
     setEdges(graph.edges);
     setViewport(graph.viewport);

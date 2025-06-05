@@ -52,7 +52,6 @@ ipcMain.on('export', async (event, {payload})=> {
 
 ipcMain.on('open', async () => {
     const fileToOpen = dialog.showOpenDialogSync();
-    console.log("Mrrp", fileToOpen)
     if (fileToOpen) {
         const contents = fs.readFileSync(fileToOpen[0], { encoding: 'utf8', flag: 'r' });
 
