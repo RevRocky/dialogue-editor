@@ -10,3 +10,7 @@ export type Dialogue = {
     choices?: Choice[]  
     next?: string   
 }
+
+export type Start = {
+    next: string
+}

@@ -1,7 +1,7 @@
 import { Edge, getConnectedEdges } from "@xyflow/react";
 import { AppNode, DialogueNode } from "../nodes/types";
 import { START_NODE_ID } from "../nodes";
-import { Dialogue } from "../utils/types";
+import { Dialogue, Start } from "../utils/types";
 
 
 
@@ -11,13 +11,20 @@ function getNodeById(targetId: string, nodes: AppNode[]) {
 }
 
 export function exportGraph(nodes: AppNode[], edges: Edge[]) {
-    const exportedDialogue: Record<string, Dialogue> = {};
+    const exportedDialogue: Record<string, Start | Dialogue> = {};
 
     // TODO: Figure out if we can we just assume start is at pos 0 of nodes
     const startNode = nodes.filter(node => node.id === START_NODE_ID);
 
+
     const initialEdge = getConnectedEdges(startNode, edges)[0];
     
+    // Gotta know where we start from
+    exportedDialogue.start = {
+        next: initialEdge.target
+    } as Start;
+
+
     // Recursively explore each edge
     function exploreEdge(edge: Edge) {
         let destinationNode = getNodeById(edge.target, nodes);
